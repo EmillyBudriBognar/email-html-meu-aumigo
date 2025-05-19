@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🐾 Pet Friday Explosiva - Meu Aumigo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #FF7A00;
+      --secondary: #5C3B18;
+      --accent: #FFD166;
+      --light: #FFF8F0;
+      --dark: #2D1B0A;
+      --success: #06D6A0;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(92, 59, 24, 0.1);
+    }
+    
+    .header {
+      text-align: center;
+      padding: 30px 0 20px;
+      background: linear-gradient(135deg, var(--primary) 0%, #FF9A3E 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: repeating-linear-gradient(
+        45deg,
+        var(--accent),
+        var(--accent) 10px,
+        var(--primary) 10px,
+        var(--primary) 20px
+      );
+    }
+    
+    .header img.logo {
+      height: 40px;
+      transition: transform 0.3s;
+    }
+    
+    .header img.logo:hover {
+      transform: scale(1.05) rotate(-5deg);
+    }
+    
+    .pet-paws {
+      position: absolute;
+      pointer-events: none;
+      width: 40px;
+      opacity: 0.8;
+    }
+    
+    .paw-1 { top: 20%; left: 25%; animation: float 6s infinite ease-in-out; }
+    .paw-2 { bottom: 20%; left: 10%; animation: float 7s infinite ease-in-out 0.5s; }
+    .paw-3 { top: 20%; right: 25%; animation: float 6s infinite ease-in-out 0.5s; }
+    .paw-4 { bottom: 20%; right: 10%; animation: float 7s infinite ease-in-out 1s; }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(5deg); }
+    }
+    
+    .nav {
+      display: flex;
+      justify-content: space-around;
+      background: white;
+      padding: 15px 0;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(92, 59, 24, 0.1);
+    }
+    
+    .nav div {
+      position: relative;
+      padding: 5px 10px;
+      color: var(--secondary);
+      transition: all 0.3s;
+    }
+    
+    .nav div:hover {
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+    
+    .nav div::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: all 0.3s;
+    }
+    
+    .nav div:hover::after {
+      width: 100%;
+      left: 0;
+    }
+    
+    .banner {
+      background: linear-gradient(135deg, var(--primary) -15%, var(--accent) 30%, var(--accent) 75%,var(--primary) 110%);
+      padding: 30px;
+      margin: 25px;
+      text-align: center;
+      color: var(--secondary);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(255, 122, 0, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .banner:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(255, 122, 0, 0.3);
+    }
+    
+    .banner h1 {
+      color: var(--secondary);
+      margin: 0 0 15px;
+      font-size: 32px;
+      font-weight: 700;
+      text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .banner p {
+      margin: 15px 0;
+      font-size: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #dba162;
+      opacity: 0.7;
+      animation: confetti-fall 5s linear infinite;
+    }
+    
+    @keyframes confetti-fall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(300px) rotate(360deg); opacity: 0; }
+    }
+    
+    .btn {
+      border-radius: 50px;
+      padding: 12px 30px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 15px;
+      transition: all 0.3s;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-orange {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(255, 122, 0, 0.3);
+    }
+    
+    .btn-orange:hover {
+      background: #E56D00;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(255, 122, 0, 0.4);
+    }
+    
+    .btn-orange:active {
+      transform: translateY(1px);
+    }
+    
+    .btn-orange::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 200%;
+      height: 200%;
+      background: rgba(255,255,255,0.1);
+      transform: rotate(30deg);
+      transition: all 0.3s;
+    }
+    
+    .btn-orange:hover::after {
+      left: 100%;
+    }
+    
+    .order-section {
+      text-align: center;
+      margin: 25px;
+      padding: 20px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(92, 59, 24, 0.05);
+      position: relative;
+    }
+    
+    .order-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      border-radius: 16px 16px 0 0;
+    }
+    
+    .order-section h2 {
+      color: var(--primary);
+      font-size: 24px;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .order-section h2::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
+      border-radius: 3px;
+    }
+    
+    .order-table {
+      width: 100%;
+      margin: 25px 0;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+    
+    .order-table tr {
+      transition: all 0.3s;
+    }
+    
+    .order-table tr:hover {
+      background-color: rgba(255, 218, 102, 0.1);
+    }
+    
+    .order-table td {
+      padding: 12px 10px;
+      border-bottom: 1px solid rgba(92, 59, 24, 0.1);
+      text-align: left;
+    }
+    
+    .order-table td:first-child {
+      font-weight: 600;
+    }
+    
+    .order-table td:last-child {
+      text-align: right;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    .total {
+      font-weight: 700;
+      text-align: right;
+      padding: 15px 20px;
+      font-size: 18px;
+      color: var(--secondary);
+      background: rgba(255, 218, 102, 0.2);
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+    
+    .total span {
+      color: var(--primary);
+      font-size: 20px;
+    }
+    
+    .footer-cat {
+      background: linear-gradient(135deg, #F8F1E5 0%, #E7D7C8 100%);
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .footer-cat img {
+      width: 150px;
+      transition: all 0.5s;
+    }
+    
+    .footer-cat img:hover {
+      transform: rotate(10deg) scale(1.1);
+    }
+    
+    .footer-cat p {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    
+    .footer-cat p:first-of-type {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--secondary);
+    }
+    
+    .btn-brown {
+      background: var(--secondary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(92, 59, 24, 0.2);
+    }
+    
+    .btn-brown:hover {
+      background: #4A2F12;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(92, 59, 24, 0.3);
+    }
+    
+    .btn-brown:active {
+      transform: translateY(1px);
+    }
+    
+    .tracking-animation {
+      display: inline-block;
+      margin-left: 10px;
+      animation: tracking-pulse 1.5s infinite;
+    }
+    
+    @keyframes tracking-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    
+    .footer-bottom {
+      background: linear-gradient(135deg, var(--primary) 0%, #FF9A3E 100%);
+      text-align: center;
+      padding: 25px 10px;
+      color: white;
+    }
+    
+    .footer-bottom div:first-child {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+    
+    .social-icons {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .social-icons a {
+      display: inline-block;
+      transition: all 0.3s;
+    }
+    
+    .social-icons a:hover {
+      transform: translateY(-5px) rotate(10deg);
+    }
+    
+    .social-icons img {
+      width: 36px;
+      height: 36px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+    
+    .guarantee-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 12px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50px;
+      font-size: 14px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .guarantee-badge img {
+      width: 24px;
+      height: 24px;
+    }
+    
+    .progress-container {
+      width: 100%;
+      background-color: rgba(255,255,255,0.3);
+      border-radius: 50px;
+      margin: 25px 0;
+      overflow: hidden;
+    }
+    
+    .progress-bar {
+      height: 8px;
+      background-color: white;
+      width: 65%;
+      border-radius: 50px;
+      position: relative;
+      animation: progress-pulse 2s infinite;
+    }
+    
+    @keyframes progress-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+    
+    .progress-bar::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: -4px;
+      width: 16px;
+      height: 16px;
+      background-color: white;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(255,255,255,0.8);
+    }
+    
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--dark);
+    }
+    
+    .progress-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
+    }
+    
+    .progress-step.active {
+      font-weight: 600;
+    }
+    
+    .progress-step::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      background-color: white;
+      border-radius: 50%;
+      margin-bottom: 5px;
+      box-shadow: 0 0 0 3px var(--primary);
+    }
+    
+    .progress-step.complete::before {
+      background-color: var(--success);
+    }
+    
+    .pet-tag {
+      position: absolute;
+      right: 20px;
+      top: -15px;
+      background: var(--primary);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      transform: rotate(5deg);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    @media (max-width: 600px) {
+      .container {
+        border-radius: 0;
+      }
+      
+      .nav {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+      }
+      
+      .banner, .order-section {
+        margin: 15px;
+      }
+      
+      .banner h1 {
+        font-size: 28px;
+      }
+      
+      .order-table td {
+        padding: 10px 5px;
+        font-size: 14px;
+      }
+      
+      .footer-cat img {
+        width: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://i.ibb.co/RqymcC4/meuaumigo.png" alt="Meu Aumigo" class="logo" style="width: 70px; height: 70px;">
+      <img src="https://i.ibb.co/1th31hLB/paw.png" class="pet-paws paw-1" alt="Paw print">
+      <img src="https://i.ibb.co/1th31hLB/paw.png" class="pet-paws paw-2" alt="Paw print">
+      <img src="https://i.ibb.co/1th31hLB/paw.png" class="pet-paws paw-3" alt="Paw print">
+      <img src="https://i.ibb.co/1th31hLB/paw.png" class="pet-paws paw-4" alt="Paw print">
+    </div>
+    
+    <div class="nav">
+      <div>🐕 Higiene</div>
+      <div>❤️ Saúde</div>
+      <div>✨ Bem-Estar</div>
+      <div>🎉 Ofertas</div>
+    </div>
+    
+    <div class="banner">
+      <h1>🚀 PET FRIDAY ESPECIAL!</h1>
+      <p>Seu pet merece o melhor! Descontos de até 70% em tudo que seu aumigo ama! 🐶😻</p>
+      <p><strong>Oferta válida apenas por 48 horas!</strong> ⏳</p>
+      <a href="#" class="btn btn-orange">QUERO ECONOMIZAR AGORA!</a>
+    </div>
+    
+    <div class="order-section">
+      <div class="pet-tag">SEU PEDIDO</div>
+      <h2>PEDIDO Nº 32549987</h2>
+      
+      <div class="progress-container">
+        <div class="progress-bar"></div>
+      </div>
+      
+      <div class="progress-steps">
+        <div class="progress-step complete">Processado</div>
+        <div class="progress-step active">Preparando</div>
+        <div class="progress-step">Transporte</div>
+        <div class="progress-step">Entrega</div>
+      </div>
+      
+      <table class="order-table">
+        <tr>
+          <td>🐾 Royal Canin Adult 8KG</td>
+          <td>QTD 1</td>
+          <td>R$35,99</td>
+        </tr>
+        <tr>
+          <td>🐾 Royal Canin Mini 2KG</td>
+          <td>QTD 1</td>
+          <td>R$23,99</td>
+        </tr>
+        <tr>
+          <td>🐾 Coleira Azul TAM P</td>
+          <td>QTD 1</td>
+          <td>R$14,99</td>
+        </tr>
+        <tr>
+          <td>🎁 Brinde Surpresa</td>
+          <td>QTD 1</td>
+          <td>R$0,00</td>
+        </tr>
+      </table>
+      
+      <div class="total">TOTAL: <span>R$74,97</span></div>
+      
+      <div class="guarantee-badge">
+        <img src="https://i.ibb.co/Pvp5Xmkb/Success.png" alt="Garantia">
+        <span>Compra 100% segura | Entrega garantida</span>
+      </div>
+    </div>
+    
+    <div class="footer-cat">
+      <!-- Confetti elements -->
+      <div class="confetti" style="left:10%;animation-delay:0s;"></div>
+      <div class="confetti" style="left:20%;animation-delay:0.5s;"></div>
+      <div class="confetti" style="left:30%;animation-delay:1s;"></div>
+      <div class="confetti" style="left:40%;animation-delay:1.5s;"></div>
+      <div class="confetti" style="left:50%;animation-delay:0.2s;"></div>
+      <div class="confetti" style="left:60%;animation-delay:0.7s;"></div>
+      <div class="confetti" style="left:70%;animation-delay:1.2s;"></div>
+      <div class="confetti" style="left:80%;animation-delay:0.8s;"></div>
+      <div class="confetti" style="left:90%;animation-delay:0.3s;"></div>
+      
+      <img src="https://i.ibb.co/DHzLpQCb/cat.png" alt="Gato com presente" style="width: 150px; position: relative; z-index: 10;">
+      <p><strong>Seu pet já está ansioso pelo pacote!</strong></p>
+      <p>Acompanhe cada etapa e prepare-se para ver a felicidade do seu amiguinho!</p>
+      <a href="#" class="btn btn-brown">RASTREAR PEDIDO <span class="tracking-animation">🔍</span></a>
+    </div>
+    
+    <div class="footer-bottom">
+      <div><strong>Meu Aumigo - Tudo para quem ama pets!</strong></div>
+      
+      <div class="social-icons">
+        <a href="#"><img src="https://i.ibb.co/cc3xKDtT/zap.png" alt="WhatsApp"></a>
+        <a href="#"><img src="https://i.ibb.co/5hYyyRjR/insta.png" alt="Instagram"></a>
+        <a href="#"><img src="https://i.ibb.co/CRsYw9M/mail.png" alt="Email"></a>
+        <a href="#"><img src="https://i.ibb.co/nsYR6KCC/face.png" alt="Facebook"></a>
+        <a href="#"><img src="https://i.ibb.co/tTT2BJrQ/tiktok.png" alt="TikTok"></a>
+      </div>
+      
+      <div style="margin-top:20px;font-size:12px;">
+        © 2025 Meu Aumigo | Todos os direitos reservados
+      </div>
+    </div>
+  </div>
+</body>
+</html>
